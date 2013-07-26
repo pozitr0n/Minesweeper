@@ -15,10 +15,10 @@ var MyMineSweeper = {
                         this.gameCont = document.createElement('table');
                         this.gameCont.className = 'game-cont';
                         
-                        this.gameCont.insertRow(0);
-                        this.gameCont.insertRow(1);
+                        this.gameCont.insertRow( 0 );
+                        this.gameCont.insertRow( 1 );
         
-                        this.gameMenu = this.gameCont.rows[0].insertCell(0);
+                        this.gameMenu = this.gameCont.rows[ 0 ].insertCell( 0 );
                         this.gameMenu.rowSpan = 2;
                         this.gameMenu.className = 'game-menu';
                         this.gameMenu.appendChild(document.createTextNode('Ширина поля:'));
@@ -49,9 +49,9 @@ var MyMineSweeper = {
                         this.gameMenu.appendChild(this.BInput);
                         this.gameMenu.appendChild(this.Init);
         
-                        this.gameStats = this.gameCont.rows[0].insertCell(1);
+                        this.gameStats = this.gameCont.rows[ 0 ].insertCell( 1 );
         
-                        this.gameField = this.gameCont.rows[1].insertCell(0);
+                        this.gameField = this.gameCont.rows[ 1 ].insertCell( 0 );
                         this.gameField.className = 'game-field';
         
                         this.game.appendChild(this.gameCont);

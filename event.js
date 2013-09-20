@@ -5,51 +5,51 @@ Event = (function() {
   function fixEvent(event) {
   event = event || window.event
   
-    if ( event.isFixed ) {
-      return event
-    }
-    event.isFixed = true 
-  
-    event.preventDefault = event.preventDefault || function(){this.returnValue = false}
-    event.stopPropagation = event.stopPropagaton || function(){this.cancelBubble = true}
+    	if ( event.isFixed ) {
+      		return event
+    	}
+    		event.isFixed = true
+    		event.preventDefault = event.preventDefault || function(){this.returnValue = false}
+    		event.stopPropagation = event.stopPropagaton || function(){this.cancelBubble = true}
     
-    if (!event.target) {
-        event.target = event.srcElement
-    }
+    		if ( !event.target ) {
+        		event.target = event.srcElement
+    		}
   
-    if (!event.relatedTarget && event.fromElement) {
-        event.relatedTarget = event.fromElement == event.target ? event.toElement : event.fromElement;
-    }
+    			if (!event.relatedTarget && event.fromElement) {
+        			event.relatedTarget = event.fromElement == event.target ? event.toElement : event.fromElement;
+    			}
   
-    if ( event.pageX == null && event.clientX != null ) {
-        var html = document.documentElement, body = document.body;
-        event.pageX = event.clientX + (html && html.scrollLeft || body && body.scrollLeft || 0) - (html.clientLeft || 0);
-        event.pageY = event.clientY + (html && html.scrollTop || body && body.scrollTop || 0) - (html.clientTop || 0);
-    }
+    				if ( event.pageX == null && event.clientX != null ) {
+        				var html = document.documentElement, body = document.body;
+        				
+        				event.pageX = event.clientX + (html && html.scrollLeft || body && body.scrollLeft || 0) - (html.clientLeft || 0);
+        				event.pageY = event.clientY + (html && html.scrollTop || body && body.scrollTop || 0) - (html.clientTop || 0);
+    				}
   
-    if ( !event.which && event.button ) {
-        event.which = (event.button & 1 ? 1 : ( event.button & 2 ? 3 : ( event.button & 4 ? 2 : 0 ) ));
-    }
+    					if ( !event.which && event.button ) {
+        					event.which = (event.button & 1 ? 1 : ( event.button & 2 ? 3 : ( event.button & 4 ? 2 : 0 ) ));
+    					}
 	
 	return event
   }  
   
-  /* Вызывается в контексте элемента всегда this = element */
-  function commonHandle(event) {
-    event = fixEvent(event)
+  	/* Вызывается в контексте элемента всегда this = element */
+  	function commonHandle(event) {
+    		event = fixEvent(event)
     
-    var handlers = this.events[event.type]
-
-	for ( var g in handlers ) {
-      var handler = handlers[g]
-
-      var ret = handler.call(this, event)
-      if ( ret === false ) {
-          event.preventDefault()
-          event.stopPropagation()
-      }
-    }
-  }
+    		var handlers = this.events[event.type]
+		for ( var g in handlers ) {
+			
+      			var handler = handlers[g]
+      			var ret = handler.call(this, event)
+      			
+      				if ( ret === false ) {
+          				event.preventDefault()
+          				event.stopPropagation()
+      				}
+    		}
+  	}
   
   return {
     add: function(elem, type, handler) {
